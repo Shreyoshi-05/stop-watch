@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>stop watch</title>
+
+    <style>
+       body{
+        background-color: rgb(105, 55, 6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 90vh;
+       }
+       #wrapper{
+        color: white;
+       }
+       .degit{
+        font-size: 140px;
+        font-weight: bold;
+        margin: 13px;
+       }
+       #btn-container{
+        text-align: center;
+        margin-top: 30px;
+       }
+       .btn{
+        width: 100px;
+        height: 40px;
+        margin: 15px;
+        cursor: pointer;
+       }
+       #start{
+        background-color: chocolate;
+        color: white;
+       }
+       #stop{
+        background-color: rgb(20, 126, 36);
+        color: white;
+       }
+       #reset{
+        background-color: rgb(188, 14, 17);
+        color: aliceblue;
+       }
+
+
+
+    </style>
+
+
+</head>
+<body>
+    <div id="wrapper">
+        <div id="time">
+            <span class="degit" id="hr">00</span>
+            <span class="degit" id="min">00</span>
+            <span class="degit" id="sec">00</span>
+            <span class="degit" id="count">00</span>
+        </div>
+        <div id="btn-container">
+            <button class="btn" id="start" onclick="start()">start</button>
+            <button class="btn" id="stop" onclick="stop()">stop</button>
+            <button class="btn" id="reset" onclick="reset()">reset</button>
+        </div>
+    </div>
+
+    <script>
+        const hour = document.getElementById("hr")
+        const minute = document.getElementById("min")
+        const second = document.getElementById("sec")
+        const degit = document.getElementById("count")
+
+        let hr = 0;
+        let min = 0;
+        let sec = 0;
+        let count = 0;
+        
+        let run = false;
+
+        function start(){
+            run = true;
+            stopWatch();
+        }
+
+        function stop(){
+            run = false;
+        }
+
+        function reset(){
+            run = false;
+
+            hr = 0;
+            min = 0;
+            sec = 0;
+            count = 0;
+
+            second.innerHTML = "00";
+            degit.innerHTML = "00";
+            minute.innerHTML = "00";
+            hour.innerHTML = "00";
+
+        }
+
+        function stopWatch(){
+            if(run==true){
+                count = count+1;
+                
+
+                if(count==100){
+                    sec = sec+1;
+                    count = 0;
+                }
+
+
+                if(sec == 60){
+                    min = min+1;
+                    sec = 0;
+                }
+
+                if(min==60){
+                    hr = hr+1;
+                    min = 0;
+                    sec = 0;
+                }
+
+                let fsecString  = sec;
+                let fcountString = count;
+                let fminString = min;
+                let fhrString = hr;
+
+                if(hr < 10){
+                    fhr = "0"+fhrString ; 
+                }
+
+                if(min < 10){
+                    fminString = "0"+ fminString ; 
+                }
+
+                if(sec < 10){
+                    fsecString = "0"+ fsecString ; 
+                }
+
+                if(count < 10){
+                    fcountString = "0"+ fcountString ; 
+                }
+
+                second.innerHTML = fsecString;
+                degit.innerHTML = fcountString;
+                minute.innerHTML = fminString;
+                hour.innerHTML = fhrString;
+
+                setTimeout("stopWatch()",10)
+            }
+        }
+
+    </script>
+</body>
+</html>
